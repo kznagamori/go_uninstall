@@ -35,7 +35,9 @@ func main() {
 			argsBase := filepath.Base(os.Args[i])
 			fileBase := filepath.Base(file.Name())
 			if strings.TrimSuffix(argsBase, filepath.Ext(argsBase)) == strings.TrimSuffix(fileBase, filepath.Ext(fileBase)) {
-				if err := os.Remove(file.Name()); err != nil {
+				rmfile := filepath.Join(dir, file.Name())
+				log.Printf("ファイル: %vを削除します。\n", rmfile)
+				if err := os.Remove(rmfile); err != nil {
 					log.Fatalf("ファイルの削除に失敗しました: %v", err)
 				}
 				break
